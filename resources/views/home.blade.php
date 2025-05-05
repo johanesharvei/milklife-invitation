@@ -37,6 +37,7 @@
             position: relative;
             max-width: 416px; /* match image width */
             margin: 0 auto;
+            margin-top: -1px !important;
         }
 
         .hero-image {
@@ -318,17 +319,15 @@
 
             // confirmation
 
-            document.querySelectorAll('.hero-btn-close-modal').forEach(button => {
-                button.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const modal = document.getElementById('rsvp-modal');
-                    const image = document.getElementById('image-confirm');
-                    if (!modal.classList.contains('hidden')) {
-                        modal.classList.add('hidden');
-                        image.src = '{{ asset("img/slide-5-submit.jpg") }}'
-                    }
-                })
-            })
+            document.addEventListener('click', function () {
+                const modal = document.getElementById('rsvp-modal');
+                const image = document.getElementById('image-confirm');
+
+                if (!modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    image.src = '{{ asset("img/slide-5-submit.jpg") }}';
+                }
+            });
 
             document.querySelectorAll('.btn-confirm').forEach(button => {
                 button.addEventListener('click', function (e) {

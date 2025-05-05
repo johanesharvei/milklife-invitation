@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"  # Expose PHP-FPM on port 9000
+      - "3000:3000"  # Expose Vite Dev Server on port 3000
+    volumes:
+      - .:/var/www
+    depends_on:
+    env_file: .env-file
+
+  postgres:
+    image: postgres:15
+    container_name: pg_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: milk_life
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "9009:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

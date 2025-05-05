@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 375px;
+            max-width: 400px;
             margin: 0 auto;
             background: white;
             min-height: 100vh;
@@ -260,7 +260,7 @@
             <div class="hero-container">
                 @if($invitee && strtoupper($invitee->status) === 'PENDING')
                 <img src="{{ asset('img/slide-5.jpg') }}" alt="Slide 5" class="hero-image" id="image-confirm">
-                <div class="hero-btn-yes-slide-4">
+                <div class="hero-btn-yes-slide-4" id="btn-yes">
                     <a href="#"
                         class="btn-yes-link btn-confirm pointer"
                         data-update="yes"
@@ -268,7 +268,7 @@
                         aria-label="Yes, Definitely Come!">
                     </a>
                 </div>
-                <div class="hero-btn-no-slide-4">
+                <div class="hero-btn-no-slide-4" id="btn-no">
                     <a href="#"
                         class="btn-no-link btn-confirm pointer"
                         data-update="no"
@@ -324,9 +324,13 @@
             document.addEventListener('click', function () {
                 const modal = document.getElementById('rsvp-modal');
                 const image = document.getElementById('image-confirm');
+                const btnYes = document.getElementById('btn-yes');
+                const btnNo = document.getElementById('btn-no');
 
                 if (!modal.classList.contains('hidden')) {
                     modal.classList.add('hidden');
+                    btnYes.remove();
+                    btnNo.remove();
                     image.src = '{{ asset("img/slide-5-submit.jpg") }}';
                 }
             });

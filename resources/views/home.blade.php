@@ -37,7 +37,7 @@
 
         .hero-container {
             position: relative;
-            max-width: 416px; /* match image width */
+            max-width: 425px; /* match image width */
             margin: 0 auto;
             margin-top: -1px !important;
         }

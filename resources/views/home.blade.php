@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=375, initial-scale=1.0"> {{-- Forces mobile width --}}
     <title>{{ env('APP_NAME') }}</title>
+    <meta name="description" content="This page is an invitation page from Milk Life to {{$invitee ? $invitee->name : ''}}">
+</head>
     <style>
         @font-face {
             font-family: 'CalSans';

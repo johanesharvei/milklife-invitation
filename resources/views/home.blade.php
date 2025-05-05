@@ -48,6 +48,20 @@
             display: block;
         }
 
+        .hero-image-btn-div {
+            position: absolute;
+            top: 5%; /* Adjust this to sit right below 'Dear..' in image */
+            left: 80%;
+            box-sizing: border-box;
+            align-content: center;
+        }
+
+        .hero-image-btn {
+            width: 60%;
+            height: auto;
+            display: block;
+        }
+
         .hero-text {
             position: absolute;
             top: 0%; /* Adjust this to sit right below 'Dear..' in image */
@@ -61,7 +75,7 @@
         }
 
         .hero-text .name {
-            font-size: clamp(20px, 6vw, 32px);
+            font-size: clamp(20px, 7vw, 32px);
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -83,7 +97,7 @@
         }
 
         .hero-text-date .date {
-            font-size: clamp(16px, 6vw, 26px);
+            font-size: clamp(16px, 7vw, 26px);
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -128,7 +142,7 @@
         }
 
         .hero-text-btm .people {
-            font-size: clamp(20px, 6vw, 32px);
+            font-size: clamp(20px, 7vw, 32px);
             font-weight: bold;
             color: #1f2e9a;
             margin: 0;
@@ -223,6 +237,9 @@
         <main>
             <div class="hero-container">
                 <img src="{{ asset('img/slide-1.jpg') }}" alt="Slide 1" class="hero-image">
+                <div class="hero-image-btn-div pointer" id="sound-toggle">
+                    <img id="sound-img" src="{{ asset('img/sound-on.png') }}" alt="Sound" class="hero-image-btn">
+                </div>
             </div>
             <div class="hero-container">
                 <img src="{{ asset('img/slide-2.jpg') }}" alt="Background" class="hero-image" />
@@ -282,42 +299,38 @@
             </div>
         </main>
     </div>
-    <audio id="bg-music" loop autoplay muted>
-        <source src="{{asset('audio/audio.mp3')}}" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+    <audio src="{{ asset('audio/audio.mp3') }}" id="bg-music" autoplay muted loop playsinline></audio>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let audioPlayer = document.getElementById('bg-music');
-            let unmuted = false;
+            const audio = document.getElementById('bg-music');
+            const soundToggle = document.getElementById('sound-toggle');
+            const soundImg = document.getElementById('sound-img');
+            let isMuted = true;
 
-            // Function to try unmuting audio
-            function tryUnmute() {
-                console.log('User interaction detected');
-                if (audioPlayer && !unmuted) {
-                    audioPlayer.muted = false; // Unmute the audio
-                    audioPlayer.play(); // Start playing after unmuting
-                    unmuted = true;
-                    console.log('Audio unmuted:', unmuted);
-                }
-            }
+            // Ensure muted autoplay works
+            audio.muted = true;
+            audio.play().catch(e => {
+                console.warn('Muted autoplay may be blocked:', e);
+            });
 
-            // Add interaction listeners (click, scroll, or touchstart)
-            function addInteractionListeners() {
-                if (typeof window.addEventListener === 'function') {
-                    ['click', 'scroll', 'touchstart'].forEach(event => {
-                        window.addEventListener(event, tryUnmute, { once: true });
+            soundToggle.addEventListener('click', function () {
+                if (isMuted) {
+                    audio.muted = false;
+                    audio.play().then(() => {
+                        soundImg.src = '{{ asset("img/sound-off.png") }}'; // next state = "click to mute"
+                        isMuted = false;
+                        console.log('Audio unmuted and playing');
+                    }).catch(e => {
+                        console.error('Play failed after unmuting:', e);
                     });
+                } else {
+                    audio.pause();
+                    audio.muted = true;
+                    soundImg.src = '{{ asset("img/sound-on.png") }}'; // next state = "click to unmute"
+                    isMuted = true;
+                    console.log('Audio muted and paused');
                 }
-            }
-
-            // Ensure the audio is ready and wait for user interaction to unmute
-            if (audioPlayer) {
-                audioPlayer.addEventListener('canplaythrough', function() {
-                    console.log('Audio is ready');
-                    addInteractionListeners();
-                });
-            }
+            });
 
             // confirmation
 

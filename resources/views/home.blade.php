@@ -205,6 +205,16 @@
             box-sizing: border-box;
             align-content: center;
         }
+
+        .hero-btn-close-invitation {
+            position: absolute;
+            bottom: 18%;
+            left: 22.5%;
+            width: 200px;
+            height: 50px;
+            box-sizing: border-box;
+            align-content: center;
+        }
     </style>
 </head>
 <body>
@@ -234,12 +244,32 @@
             </div>
         </div>
 
+        <div id="invitation-modal" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            ">
+            <div style="
+                padding: 1.5rem;
+                border-radius: 12px;
+                max-width: 320px;
+                text-align: center;
+            ">
+                <img src="{{asset('img/invitation_otp.png')}}" alt="Invitation Image" style="width: 100%; max-width: 260px; height: auto;" />
+                <div class="hero-btn-close-invitation pointer" id="btn-close-invitation"></div>
+            </div>
+        </div>
+
         <main>
             <div class="hero-container">
                 <img src="{{ asset('img/slide-1.jpg') }}" alt="Slide 1" class="hero-image">
-                <div class="hero-image-btn-div pointer" id="sound-toggle">
-                    <img id="sound-img" src="{{ asset('img/sound-on.png') }}" alt="Sound" class="hero-image-btn">
-                </div>
             </div>
             <div class="hero-container">
                 <img src="{{ asset('img/slide-2.jpg') }}" alt="Background" class="hero-image" />
@@ -303,9 +333,32 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const audio = document.getElementById('bg-music');
-            const soundToggle = document.getElementById('sound-toggle');
-            const soundImg = document.getElementById('sound-img');
+            const soundToggle = document.getElementById('btn-close-invitation');
+            const modalInvitation = document.getElementById('invitation-modal');
             let isMuted = true;
+
+            function lockScroll() {
+                const scrollY = window.scrollY;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollY}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.dataset.scrollY = scrollY; // Save for unlock
+            }
+
+            function unlockScroll() {
+                const scrollY = document.body.dataset.scrollY;
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                window.scrollTo(0, parseInt(scrollY || '0'));
+            }
+
+            // prevent scroll on modal show
+            if (modalInvitation) {
+                lockScroll();
+            }
 
             // Ensure muted autoplay works
             audio.muted = true;
@@ -317,23 +370,17 @@
                 if (isMuted) {
                     audio.muted = false;
                     audio.play().then(() => {
-                        soundImg.src = '{{ asset("img/sound-off.png") }}'; // next state = "click to mute"
+                        modalInvitation.classList.add('hidden');
                         isMuted = false;
+                        unlockScroll()
                         console.log('Audio unmuted and playing');
                     }).catch(e => {
                         console.error('Play failed after unmuting:', e);
                     });
-                } else {
-                    audio.pause();
-                    audio.muted = true;
-                    soundImg.src = '{{ asset("img/sound-on.png") }}'; // next state = "click to unmute"
-                    isMuted = true;
-                    console.log('Audio muted and paused');
                 }
             });
 
             // confirmation
-
             document.addEventListener('click', function () {
                 const modal = document.getElementById('rsvp-modal');
                 const image = document.getElementById('image-confirm');

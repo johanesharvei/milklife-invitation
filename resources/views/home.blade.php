@@ -208,10 +208,10 @@
 
         .hero-btn-close-invitation {
             position: absolute;
-            bottom: 18%;
+            bottom: 14%;
             left: 22.5%;
             width: 200px;
-            height: 50px;
+            height: 100px;
             box-sizing: border-box;
             align-content: center;
         }

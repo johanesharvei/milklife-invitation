@@ -31,7 +31,7 @@
                             <td class="px-4 py-2 border">
                                 <a href="{{ ENV('APP_URL').'invite/'.$invitation->slug }}" target="_blank">{{ ENV('APP_URL').'invite/'.$invitation->slug }}</a>
                             </td>
-                            <td class="px-4 py-2 border">{{ date_format(new DateTime($invitee->event_date), 'd M Y') }}</td>
+                            <td class="px-4 py-2 border">{{ date_format(new DateTime($invitation->event_date), 'd M Y') }}</td>
                         </tr>
                     @empty
                         <tr>

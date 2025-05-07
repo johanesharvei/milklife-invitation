@@ -24,7 +24,7 @@
             max-width: 415px;
             margin: 0 auto;
             background: white;
-            min-height: 100vh;
+            min-height: 101vh;
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
         }
 

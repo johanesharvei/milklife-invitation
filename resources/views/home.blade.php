@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 400px;
+            max-width: 415px;
             margin: 0 auto;
             background: white;
             min-height: 100vh;
@@ -132,10 +132,10 @@
         .maps-link {
             position: absolute;
             left:36%;
-            top:34%;
+            top:37%;
             bottom: 190px; /* Adjust depending on exact position */
             transform: translateX(-50%);
-            width: 190px;
+            width: 200px;
             height: 36px;
             z-index: 10;
             text-decoration: none;
@@ -285,7 +285,7 @@
                 </div>
                 @if($invitee)
                 <div class="hero-btn-slide-2">
-                    <a href="https://www.google.com/maps/place/Subang,+West+Java"
+                    <a href="https://maps.app.goo.gl/ui223bG5vbzbahBT6"
                         class="maps-link"
                         target="_blank"
                         aria-label="Google Maps Link">

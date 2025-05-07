@@ -33,6 +33,7 @@
                             </td>
                             <td class="px-4 py-2 border">{{ date_format(new DateTime($invitee->event_date), 'd M Y') }}</td>
                         </tr>
+                    @empty
                         <tr>
                             <td colspan="6" class="px-4 py-4 text-center text-gray-500">No invitations found.</td>
                         </tr>

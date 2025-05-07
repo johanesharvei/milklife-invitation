@@ -28,7 +28,9 @@
                                     {{ ucfirst($invitation->status) }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 border">{{ ENV('APP_URL').'invite/'.$invitation->slug }}</td>
+                            <td class="px-4 py-2 border">
+                                <a href="{{ ENV('APP_URL').'invite/'.$invitation->slug }}" target="_blank">{{ ENV('APP_URL').'invite/'.$invitation->slug }}</a>
+                            </td>
                             <td class="px-4 py-2 border">{{ $invitation->created_at->format('Y-m-d') }}</td>
                         </tr>
                     @empty

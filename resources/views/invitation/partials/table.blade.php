@@ -11,6 +11,7 @@
                     <tr>
                         <th class="px-4 py-2 border">#</th>
                         <th class="px-4 py-2 border">Name</th>
+                        <th class="px-4 py-2 border">Qty</th>
                         <th class="px-4 py-2 border">Status</th>
                         <th class="px-4 py-2 border">Created At</th>
                     </tr>
@@ -20,6 +21,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-2 border">{{ $index + 1 }}</td>
                             <td class="px-4 py-2 border">{{ $invitation->name }}</td>
+                            <td class="px-4 py-2 border">{{ $invitation->people }}</td>
                             <td class="px-4 py-2 border">
                                 <span class="px-2 py-1 rounded text-white {{ $invitation->status === 'accepted' ? 'bg-green-500' : 'bg-yellow-500' }}">
                                     {{ ucfirst($invitation->status) }}

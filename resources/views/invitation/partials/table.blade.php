@@ -14,7 +14,7 @@
                         <th class="px-4 py-2 border">Qty</th>
                         <th class="px-4 py-2 border">Status</th>
                         <th class="px-4 py-2 border">Link</th>
-                        <th class="px-4 py-2 border">Event Date/th>
+                        <th class="px-4 py-2 border">Created At</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +31,8 @@
                             <td class="px-4 py-2 border">
                                 <a href="{{ ENV('APP_URL').'invite/'.$invitation->slug }}" target="_blank">{{ ENV('APP_URL').'invite/'.$invitation->slug }}</a>
                             </td>
-                            <td class="px-4 py-2 border">{{ $invitation->event_date->format('Y-m-d') }}</td>
+                            <td class="px-4 py-2 border">{{ date_format(new DateTime($invitee->event_date), 'd M Y') }}</td>
                         </tr>
-                    @empty
                         <tr>
                             <td colspan="6" class="px-4 py-4 text-center text-gray-500">No invitations found.</td>
                         </tr>

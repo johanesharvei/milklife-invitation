@@ -13,6 +13,7 @@
                         <th class="px-4 py-2 border">Name</th>
                         <th class="px-4 py-2 border">Qty</th>
                         <th class="px-4 py-2 border">Status</th>
+                        <th class="px-4 py-2 border">Link</th>
                         <th class="px-4 py-2 border">Created At</th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                                     {{ ucfirst($invitation->status) }}
                                 </span>
                             </td>
+                            <td class="px-4 py-2 border">{{ ENV('APP_URL').'invite/'.$invitation->slug }}</td>
                             <td class="px-4 py-2 border">{{ $invitation->created_at->format('Y-m-d') }}</td>
                         </tr>
                     @empty

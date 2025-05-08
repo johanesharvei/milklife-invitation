@@ -177,5 +177,13 @@ class InvitationSeeder extends Seeder
             'people' => 4,
             'created_by' => 1,
         ]);
+        Invitation::create([
+            'name' => 'PILONA',
+            'slug' => 'PILONA',
+            'status' => 'pending',
+            'event_date' => '2025-05-22',
+            'people' => 2,
+            'created_by' => 1,
+        ]);
     }
 }
